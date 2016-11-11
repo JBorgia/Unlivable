@@ -1,25 +1,25 @@
 package data;
 
 public class Bedroom {
-	private String bedroomSqft;
 	private Boolean attachedBa;
 	private Boolean closet;
-	private String closetSqft;
+	private Double bedroomSqft;
+	private Double closetSqft;
 	
 	public Bedroom(){}
 
-	public Bedroom(String bedroomSqft, Boolean attachedBa, Boolean closet, String closetSqft) {
-		this.bedroomSqft = bedroomSqft;
+	public Bedroom(Boolean attachedBa, Boolean closet, Double bedroomSqft, Double closetSqft) {
 		this.attachedBa = attachedBa;
 		this.closet = closet;
+		this.bedroomSqft = bedroomSqft;
 		this.closetSqft = closetSqft;
 	}
 
-	public String getBedroomSqft() {
+	public Double getBedroomSqft() {
 		return bedroomSqft;
 	}
 
-	public void setBedroomSqft(String bedroomSqft) {
+	public void setBedroomSqft(Double bedroomSqft) {
 		this.bedroomSqft = bedroomSqft;
 	}
 
@@ -39,11 +39,11 @@ public class Bedroom {
 		this.closet = closet;
 	}
 
-	public String getClosetSqft() {
+	public Double getClosetSqft() {
 		return closetSqft;
 	}
 
-	public void setClosetSqft(String closetSqft) {
+	public void setClosetSqft(Double closetSqft) {
 		this.closetSqft = closetSqft;
 	}
 	

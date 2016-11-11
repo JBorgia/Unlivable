@@ -17,9 +17,9 @@ public class Property {
 	public Property() {
 	}
 
-	public Property(String streetNum, String streetName, String streetType, String unit, String city, String state,
-			String zip, Double buildingSqft, Double landSqft, Integer numOfBr, Double numOfBa, Double ceilingHeight,
-			Double stairSqft, Double hallSqft) {
+	public Property(Integer streetNum, String streetName, String streetType, String unit, String city, String state,
+			Integer zip, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa, Double ceilingHeight,
+			Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
 		this.address.setStreetNum(streetNum);
 		this.address.setStreetName(streetName);
 		this.address.setStreetType(streetType);
@@ -29,11 +29,13 @@ public class Property {
 		this.address.setZip(zip);
 		this.buildingSqft = buildingSqft;
 		this.landSqft = landSqft;
+		this.numOfFloors = numOfFloors;
 		this.numOfBr = numOfBr;
 		this.numOfBa = numOfBa;
 		this.ceilingHeight = ceilingHeight;
 		this.stairSqft = stairSqft;
 		this.hallSqft = hallSqft;
+		this.bedrooms = bedrooms;
 	}
 
 	public Address getAddress() {

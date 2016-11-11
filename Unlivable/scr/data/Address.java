@@ -1,19 +1,19 @@
 package data;
 
 public class Address {
-	private String streetNum;
+	private Integer streetNum;
 	private String streetName;
 	private String streetType;
 	private String unit;
 	private String city;
 	private String stateAbbr;
-	private String zip;
+	private Integer zip;
 
 	public Address() {
 	}
 
-	public Address(String streetNum, String street, String streetType, String unit, String city, String streetName, String stateAbbr,
-			String zip) {
+	public Address(Integer streetNum, String street, String streetType, String unit, String city, String streetName, String stateAbbr,
+			Integer zip) {
 		this.streetNum = streetNum;
 		this.streetName = streetName;
 		this.streetType = streetType;
@@ -23,11 +23,11 @@ public class Address {
 		this.zip = zip;
 	}
 
-	public String getStreetNum() {
+	public Integer getStreetNum() {
 		return streetNum;
 	}
 
-	public void setStreetNum(String streetNum) {
+	public void setStreetNum(Integer streetNum) {
 		this.streetNum = streetNum;
 	}
 
@@ -71,11 +71,11 @@ public class Address {
 		this.stateAbbr = state;
 	}
 
-	public String getZip() {
+	public Integer getZip() {
 		return zip;
 	}
 
-	public void setZip(String zip) {
+	public void setZip(Integer zip) {
 		this.zip = zip;
 	}
 
