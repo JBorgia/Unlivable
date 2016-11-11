@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -39,39 +40,38 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 			while ((line = buf.readLine()) != null) {
 				List<Bedroom> bedrooms = new ArrayList<>();
 				String[] tokens = line.split(",");
-				String keyNum = tokens[0];
 				Integer streetNum;
 				try {
 					streetNum = Integer.parseInt(tokens[1].replaceAll("[^\\d.]", ""));
 				} catch (Exception e1) {
-					e1.printStackTrace();
-					streetNum = 0;
+					throw new IllegalArgumentException("An address must have a number.");
 				}
-				String streetName = tokens[2];
-				String streetType = tokens[3];
+				String nsew = tokens[2];
+				String streetName = tokens[3];
 				String unit = tokens[4];
 				String city = tokens[5];
 				String stateAbbr = tokens[6];
-				Integer zip = Integer.parseInt(tokens[7].replaceAll("[^\\d.]", ""));
+				Integer zip = Integer.parseInt(tokens[7].substring(0, 5).replaceAll("[^\\d.]", ""));
+				String keyNum = createKeyNum(streetNum, zip, unit);
 				Integer numOfBr;
 				try {
-					numOfBr = Integer.parseInt(tokens[9]);
+					numOfBr = Integer.parseInt(tokens[8]);
 				} catch (Exception e) {
 					numOfBr = 0;
 				}
-				Double numOfBa = Double.parseDouble(tokens[10].replaceAll("[^\\d.]", ""));
-				Integer numOfFloors = Integer.parseInt(tokens[11].replaceAll("[^\\d.]", ""));
-				Double buildingSqft = Double.parseDouble(tokens[12].replaceAll("[^\\d.]", ""));
-				Double landSqft = Double.parseDouble(tokens[13].replaceAll("[^\\d.]", ""));
-				Double ceilingHeight = Double.parseDouble(tokens[14].replaceAll("[^\\d.]", ""));
-				Double stairSqft = Double.parseDouble(tokens[15].replaceAll("[^\\d.]", ""));
-				Double hallSqft = Double.parseDouble(tokens[16].replaceAll("[^\\d.]", ""));
+				Double numOfBa = Double.parseDouble(tokens[9].replaceAll("[^\\d.]", ""));
+				Integer numOfFloors = Integer.parseInt(tokens[10].replaceAll("[^\\d.]", ""));
+				Double buildingSqft = Double.parseDouble(tokens[11].replaceAll("[^\\d.]", ""));
+				Double landSqft = Double.parseDouble(tokens[12].replaceAll("[^\\d.]", ""));
+				Double ceilingHeight = Double.parseDouble(tokens[13].replaceAll("[^\\d.]", ""));
+				Double stairSqft = Double.parseDouble(tokens[14].replaceAll("[^\\d.]", ""));
+				Double hallSqft = Double.parseDouble(tokens[15].replaceAll("[^\\d.]", ""));
 				for (int i = 0; i < numOfBr; i++) {
 					Bedroom bedroom = new Bedroom();
-					Boolean attachedBa = Boolean.parseBoolean(tokens[17 + i * 4]);
-					Boolean closet = Boolean.parseBoolean(tokens[18 + i * 4]);
-					Double bedroomSqft = Double.parseDouble(tokens[19 + i * 4].replaceAll("[^\\d.]", ""));
-					Double closetSqft = Double.parseDouble(tokens[20 + i * 4].replaceAll("[^\\d.]", ""));
+					Boolean attachedBa = Boolean.parseBoolean(tokens[16 + i * 4]);
+					Boolean closet = Boolean.parseBoolean(tokens[17 + i * 4]);
+					Double bedroomSqft = Double.parseDouble(tokens[18 + i * 4].replaceAll("[^\\d.]", ""));
+					Double closetSqft = Double.parseDouble(tokens[19 + i * 4].replaceAll("[^\\d.]", ""));
 					bedroom.setAttachedBa(attachedBa);
 					bedroom.setCloset(closet);
 					bedroom.setBedroomSqft(bedroomSqft);
@@ -80,18 +80,66 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 				}
 
 				properties.put(keyNum,
-						new Property(streetNum, streetName, streetType, unit, city, stateAbbr, zip, buildingSqft,
-								landSqft, numOfFloors, numOfBr, numOfBa, ceilingHeight, stairSqft, hallSqft, bedrooms));
+						new Property(streetNum, nsew, streetName, unit, city, stateAbbr, zip, buildingSqft, landSqft,
+								numOfFloors, numOfBr, numOfBa, ceilingHeight, stairSqft, hallSqft, bedrooms));
 			}
 		} catch (Exception e) {
 			System.err.println(e);
 		}
+		Set<String> keys = properties.keySet();
+		System.out.println("In init");
+		for (String string : keys) {
+			System.out.println(properties.get(string));
+		}
 	}
 
 	@Override
-	public Property getPropertyByStreet(String streetNum, String streetName, String streetType) {
-		Property p = null;
-		return p;
+	public Map<String, Property> getPropertyByAddress(String streetNum, String nsew, String streetName, String unit, String city,
+			String stateAbbr, String zip) {
+		Map<String, Property> subProperties = new HashMap<>();
+		Set<String> keys = properties.keySet();
+		for (String key : keys) {
+			boolean streetNumCase = false;
+			boolean nsewCase = false;
+			boolean streetNameCase = false;
+			boolean unitCase = false;
+			boolean cityCase = false;
+			boolean stateAbbrCase = false;
+			boolean zipCase = false;
+
+			if (properties.get(key).getAddress().getStreetNum() == Integer.parseInt(streetNum)) {
+				streetNumCase = true;
+			}
+			if (properties.get(key).getAddress().getNsew().contains(nsew)) {
+				nsewCase = true;
+			}
+			if (properties.get(key).getAddress().getStreetName().contains(streetName)) {
+				streetNameCase = true;
+			}
+			if (properties.get(key).getAddress().getUnit().contains(unit)) {
+				unitCase = true;
+			}
+			if (properties.get(key).getAddress().getCity().contains(city)) {
+				cityCase = true;
+			}
+			if (properties.get(key).getAddress().getStateAbbr().contains(stateAbbr)) {
+				stateAbbrCase = true;
+			}
+			if (properties.get(key).getAddress().getZip() == Integer.parseInt(zip)) {
+				zipCase = true;
+			}
+		
+			if(streetNumCase && nsewCase && streetNameCase && unitCase && cityCase && stateAbbrCase && zipCase){
+				subProperties.clear();
+				subProperties.put(key, properties.get(key));
+				break;
+			}
+			else if((streetNumCase || streetNameCase) && ((cityCase && stateAbbrCase) || zipCase)){
+				subProperties.put(key, properties.get(key));
+			}
+		}
+
+		return subProperties;
 	}
 
 	@Override
@@ -108,21 +156,21 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 
 	@Override
 	public void addProperty(Property property) {
-		properties.put(createKeyNum(property.getAddress().getStreetNum(), property.getAddress().getStreetName(), property.getAddress().getUnit()),
-				property);
+		properties.put(createKeyNum(property.getAddress().getStreetNum(), property.getAddress().getZip(),
+				property.getAddress().getUnit()), property);
 	}
 
-	private String createKeyNum(Integer streetNum, String streetName, String unit) {
+	private String createKeyNum(Integer streetNum, Integer zip, String unit) {
 		StringBuilder sb = new StringBuilder(streetNum.toString());
 		while (sb.length() < 8) {
 			sb.append("x");
 		}
-		sb.append(streetName.toUpperCase().subSequence(0, 4));
-		while (sb.length() < 12) {
+		sb.append(zip);
+		while (sb.length() < 13) {
 			sb.append("x");
 		}
 		sb.append(unit.toUpperCase().subSequence(0, 4));
-		while (sb.length() < 16) {
+		while (sb.length() < 17) {
 			sb.append("x");
 		}
 		sb.append("A");

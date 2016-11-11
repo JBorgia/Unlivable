@@ -18,29 +18,22 @@ public class UnlivableController {
 	@Autowired
 	private UnlivableDAO unlivableDAO;
 
-	@RequestMapping(path = "GetPropertyData.do", params = "name", method = RequestMethod.GET)
-	public ModelAndView queryPropertyByName(@RequestParam("name") String name) {
+	@RequestMapping(path = "GetPropertyData.do", params = "streetNum", method = RequestMethod.GET)
+	public ModelAndView queryPropertyByName(	@RequestParam("streetNum") String streetNum,
+												@RequestParam("nsew") String nsew,
+												@RequestParam("streetName") String streetName,
+												@RequestParam("unit") String unit,
+												@RequestParam("city") String city,
+												@RequestParam("stateAbbr") String stateAbbr,
+												@RequestParam("zip") String zip) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index.jsp");
+		mv.addObject("properties", unlivableDAO.getPropertyByAddress(streetNum, nsew, streetName, unit, city, stateAbbr, zip));
+		mv.setViewName("result.jsp");
 		return mv;
 	}
 
-	@RequestMapping(path = "GetPropertyData.do", params = "abbr", method = RequestMethod.GET)
-	public ModelAndView queryPropertyByAbbreviation(@RequestParam("abbr") String abbr) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index.jsp");
-		return mv;
-	}
-
-	@RequestMapping(path = "GetPropertyData.do", params = "capital", method = RequestMethod.GET)
-	public ModelAndView queryPropertyByCapital(@RequestParam("capital") String capital) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index.jsp");
-		return mv;
-	}
-
-	@RequestMapping(path = "SlideProperty.do", params = "slide", method = RequestMethod.GET)
-	public ModelAndView querySlideProperty(@RequestParam("slide") String slide, @ModelAttribute("Property") Property Property) {
+	@RequestMapping(path = "GetPropertyData.do", params = "keyNum", method = RequestMethod.GET)
+	public ModelAndView queryPropertyByAbbreviation(@RequestParam("keyNum") String keyNum) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
 		return mv;

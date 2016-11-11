@@ -3,7 +3,7 @@ package data;
 import java.util.Map;
 
 public interface UnlivableDAO {
-	public Property getPropertyByStreet(String streetNum, String streetName, String streetType);
+	public Map<String, Property> getPropertyByAddress(String streetNum, String nsew, String streetName, String unit, String city, String stateAbbr, String zip);
 
 	public Property getPropertyByKeyNum(String keyNum);
 

@@ -1,1 +1,35 @@
 @CHARSET "UTF-8";
+
+.subtitle, .subtitle-street, .subtitle-left {
+	font-size: .8em;
+	padding-right: 5px;
+}
+
+.subtitle-left {
+	padding-left: 10px;
+}
+
+.subtitle-street {
+	padding-left: 80px;
+}
+
+.subtitle {
+	padding-left: 15px;
+}
+
+.field {
+	padding-right: 5px;
+}
+
+.drop {
+	border: 1px solid #111;
+	background: transparent;
+	padding: 5px;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	height: 26px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	text-align: center;
+}

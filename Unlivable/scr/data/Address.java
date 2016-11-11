@@ -2,8 +2,8 @@ package data;
 
 public class Address {
 	private Integer streetNum;
+	private String nsew;
 	private String streetName;
-	private String streetType;
 	private String unit;
 	private String city;
 	private String stateAbbr;
@@ -12,11 +12,11 @@ public class Address {
 	public Address() {
 	}
 
-	public Address(Integer streetNum, String street, String streetType, String unit, String city, String streetName, String stateAbbr,
+	public Address(Integer streetNum, String nsew, String street, String unit, String city, String streetName, String stateAbbr,
 			Integer zip) {
 		this.streetNum = streetNum;
+		this.nsew = nsew;
 		this.streetName = streetName;
-		this.streetType = streetType;
 		this.unit = unit;
 		this.city = city;
 		this.stateAbbr = stateAbbr;
@@ -31,20 +31,20 @@ public class Address {
 		this.streetNum = streetNum;
 	}
 
+	public String getNsew() {
+		return nsew;
+	}
+
+	public void setNsew(String nsew) {
+		this.nsew = nsew;
+	}
+
 	public String getStreetName() {
 		return streetName;
 	}
 
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
-	}
-
-	public String getStreetType() {
-		return streetType;
-	}
-
-	public void setStreetType(String streetType) {
-		this.streetType = streetType;
 	}
 
 	public String getUnit() {
@@ -81,8 +81,15 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return streetNum + " " + streetName + " " + streetType
-				+ ". " + unit + "\n" + city + ", " + stateAbbr + " " + zip;
+		return streetNum + " " + streetName + " " + unit + "\n" + city + ", " + stateAbbr + " " + zip;
+	}
+
+	public String getStateAbbr() {
+		return stateAbbr;
+	}
+
+	public void setStateAbbr(String stateAbbr) {
+		this.stateAbbr = stateAbbr;
 	}
 
 }

@@ -17,12 +17,12 @@ public class Property {
 	public Property() {
 	}
 
-	public Property(Integer streetNum, String streetName, String streetType, String unit, String city, String state,
-			Integer zip, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa, Double ceilingHeight,
-			Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
+	public Property(Integer streetNum, String nsew, String streetName, String unit, String city, String state,
+			Integer zip, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa,
+			Double ceilingHeight, Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
 		this.address.setStreetNum(streetNum);
+		this.address.setNsew(nsew);
 		this.address.setStreetName(streetName);
-		this.address.setStreetType(streetType);
 		this.address.setUnit(unit);
 		this.address.setCity(city);
 		this.address.setCity(city);

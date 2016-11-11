@@ -1,1 +1,2 @@
-streetNum,streetName.streetType,unit,city,stateAbbr,zip,address,numOfBr,numOfBa,numOfFloors,buildingSqft,landSqft,ceilingHeight,stairSqft,hallSqft,attachedBa,closet,bedroomSqft,closetSqft
+streetNum,nsew,streetName,unit,city,stateAbbr,zip,numOfBr,numOfBa,numOfFloors,buildingSqft,landSqft,ceilingHeight,stairSqft,hallSqft,attachedBa,closet,bedroomSqft,closetSqft,attachedBa,closet,bedroomSqft,closetSqft
+28,S,Nome St,C,Aurora,CO,80012,2,2,2,1132,,8,30,,TRUE,TRUE,200,20,TRUE,TRUE,200,20

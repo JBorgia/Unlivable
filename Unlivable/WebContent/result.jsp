@@ -96,54 +96,30 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div>
-				<form action="GetPropertyData.do" method="GET">
+				<c:forEach items="${properties}" var="item">
 					<table>
 						<tr>
-							<div>Please, the address of the property to retrieve</div>
+							<td>${item.address.streetNum}</td>
+							<td>${item.address.nsew}${item.address.streetName}</td>
+							<td>${item.address.unit}</td>
 						</tr>
 						<tr>
-							<td class="field"><input type="text" name="streetNum" /></td>
-							<td>
-								<table>
-									<tr>
-										<td class="field">
-										<select name="nsew" class="drop">
-												<option value="" selected="selected">N/A</option>
-												<option value="N">N</option>
-												<option value="S">S</option>
-												<option value="E">E</option>
-												<option value="W">W</option>
-												<option value="NW">NW</option>
-												<option value="NE">NE</option>
-												<option value="SE">SW</option>
-												<option value="SW">SE</option>
-										</select></td>
-										<td class="field"><input type="text" name="streetName" /></td>
-									</tr>
-								</table>
-							</td>
-							<td class="field"><input type="text" name="unit" /></td>
-						</tr>
-						<tr>
-							<td class="subtitle-left">Address Number</td>
-							<td class="subtitle-street">Street Name</td>
+							<td class="subtitle">Address Number</td>
+							<td class="subtitle">Street Name</td>
 							<td class="subtitle">Unit</td>
 						</tr>
-					</table>
-					<table>
 						<tr>
-							<td class="field"><input type="text" name="city" /></td>
-							<td class="field"><input type="text" name="stateAbbr" /></td>
-							<td class="field"><input type="text" name="zip" /></td>
+							<td>${item.address.city}</td>
+							<td>${item.address.stateAbbr}</td>
+							<td>${item.address.zip}</td>
 						</tr>
 						<tr>
-							<td class="subtitle-left">City</td>
+							<td class="subtitle">City</td>
 							<td class="subtitle">State</td>
 							<td class="subtitle">ZIP</td>
 						</tr>
 					</table>
-					<input type="submit">
-				</form>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="col-md-6"></div>
