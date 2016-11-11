@@ -7,7 +7,5 @@ public interface UnlivableDAO {
 
 	public Property getPropertyByKeyNum(String keyNum);
 
-	public Map<String, Property> getPropertyListByZip(String zip);
-
 	public void addProperty(Property property);
 }

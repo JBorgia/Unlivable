@@ -2,7 +2,6 @@ package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,10 +38,12 @@ public class UnlivableController {
 		return mv;
 	}
 
-	@RequestMapping(path = "NewProperty.do", method = RequestMethod.POST)
-	public ModelAndView createNewProperty(Property Property) {
+	@RequestMapping(path = "addProperty.do", method = RequestMethod.POST)
+	public ModelAndView createNewProperty(Property property) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index.jsp");
+		unlivableDAO.addProperty(property);
+		mv.addObject("property", property);
 		return mv;
 	}
 }

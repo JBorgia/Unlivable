@@ -186,12 +186,6 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 	}
 
 	@Override
-	public Map<String, Property> getPropertyListByZip(String zip) {
-		Map<String, Property> ps = null;
-		return ps;
-	}
-
-	@Override
 	public void addProperty(Property property) {
 		properties.put(createKeyNum(property.getAddress().getStreetNum(), property.getAddress().getZip(),
 				property.getAddress().getUnit()), property);
