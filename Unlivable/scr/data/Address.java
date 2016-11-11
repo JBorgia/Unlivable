@@ -1,19 +1,19 @@
 package data;
 
 public class Address {
-	private Integer streetNum;
+	private String streetNum;
 	private String nsew;
 	private String streetName;
 	private String unit;
 	private String city;
 	private String stateAbbr;
-	private Integer zip;
+	private String zip;
 
 	public Address() {
 	}
 
-	public Address(Integer streetNum, String nsew, String street, String unit, String city, String streetName, String stateAbbr,
-			Integer zip) {
+	public Address(String streetNum, String nsew, String street, String unit, String city, String streetName,
+			String stateAbbr, String zip) {
 		this.streetNum = streetNum;
 		this.nsew = nsew;
 		this.streetName = streetName;
@@ -23,11 +23,11 @@ public class Address {
 		this.zip = zip;
 	}
 
-	public Integer getStreetNum() {
+	public String getStreetNum() {
 		return streetNum;
 	}
 
-	public void setStreetNum(Integer streetNum) {
+	public void setStreetNum(String streetNum) {
 		this.streetNum = streetNum;
 	}
 
@@ -63,27 +63,6 @@ public class Address {
 		this.city = city;
 	}
 
-	public String getState() {
-		return stateAbbr;
-	}
-
-	public void setState(String state) {
-		this.stateAbbr = state;
-	}
-
-	public Integer getZip() {
-		return zip;
-	}
-
-	public void setZip(Integer zip) {
-		this.zip = zip;
-	}
-
-	@Override
-	public String toString() {
-		return streetNum + " " + streetName + " " + unit + "\n" + city + ", " + stateAbbr + " " + zip;
-	}
-
 	public String getStateAbbr() {
 		return stateAbbr;
 	}
@@ -92,4 +71,16 @@ public class Address {
 		this.stateAbbr = stateAbbr;
 	}
 
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	@Override
+	public String toString() {
+		return streetNum + " " + streetName + " " + unit + "\n" + city + ", " + stateAbbr + " " + zip;
+	}
 }

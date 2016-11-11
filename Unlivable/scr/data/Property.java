@@ -9,7 +9,7 @@ public class Property {
 	private Integer numOfFloors;
 	private Double buildingSqft;
 	private Double landSqft;
-	private Double ceilingHeight;
+	private Boolean vaultedCeiling;
 	private Double stairSqft;
 	private Double hallSqft;
 	private List<Bedroom> bedrooms;
@@ -17,22 +17,24 @@ public class Property {
 	public Property() {
 	}
 
-	public Property(Integer streetNum, String nsew, String streetName, String unit, String city, String state,
-			Integer zip, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa,
-			Double ceilingHeight, Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
+	public Property(String streetNum, String nsew, String streetName, String unit, String city, String stateAbbr,
+			String zip, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa,
+			Boolean vaultedCeiling, Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
+		System.out.println("PROPERTY: I'M GETTING MADE & HAVEN'T BROKEN YET! streetNum is: " + streetNum);
+		this.address = new Address();
 		this.address.setStreetNum(streetNum);
 		this.address.setNsew(nsew);
 		this.address.setStreetName(streetName);
 		this.address.setUnit(unit);
 		this.address.setCity(city);
-		this.address.setCity(city);
+		this.address.setStateAbbr(stateAbbr);
 		this.address.setZip(zip);
 		this.buildingSqft = buildingSqft;
 		this.landSqft = landSqft;
 		this.numOfFloors = numOfFloors;
 		this.numOfBr = numOfBr;
 		this.numOfBa = numOfBa;
-		this.ceilingHeight = ceilingHeight;
+		this.vaultedCeiling = vaultedCeiling;
 		this.stairSqft = stairSqft;
 		this.hallSqft = hallSqft;
 		this.bedrooms = bedrooms;
@@ -82,14 +84,6 @@ public class Property {
 		this.landSqft = landSqft;
 	}
 
-	public Double getCeilingHeight() {
-		return ceilingHeight;
-	}
-
-	public void setCeilingHeight(Double ceilingHeight) {
-		this.ceilingHeight = ceilingHeight;
-	}
-
 	public Double getStairSqft() {
 		return stairSqft;
 	}
@@ -106,4 +100,11 @@ public class Property {
 		this.hallSqft = hallSqft;
 	}
 
+	public Boolean getVaultedCeiling() {
+		return vaultedCeiling;
+	}
+
+	public void setVaultedCeiling(Boolean vaultedCeiling) {
+		this.vaultedCeiling = vaultedCeiling;
+	}
 }

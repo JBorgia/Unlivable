@@ -1,20 +1,48 @@
 @CHARSET "UTF-8";
 
-.subtitle, .subtitle-street, .subtitle-left {
+.result-table {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+}
+
+.subtitle, .subtitle-left, .subtitle, .subtitle-result, .subtitle-center,
+	.subtitle-result-right {
 	font-size: .8em;
+}
+
+.subtitle-result, .subtitle-result-right {
+	padding-top: 4px; padding-right : 5px;
+	display: table-cell;
 	padding-right: 5px;
+}
+
+.subtitle-result-right {
+	padding-left: 20px;
+	padding-right: 5px;
+}
+
+.outer {
+	display: table;
+}
+
+.subtitle-state {
+	font-size: .8em;
+	text-align: center;
+	padding-right: 4px;
 }
 
 .subtitle-left {
 	padding-left: 10px;
 }
 
-.subtitle-street {
-	padding-left: 80px;
-}
-
 .subtitle {
 	padding-left: 15px;
+}
+
+.subtitle-center {
+	text-align: center;
 }
 
 .field {
@@ -32,4 +60,13 @@
 	-moz-appearance: none;
 	appearance: none;
 	text-align: center;
+}
+
+.compare-button {
+	padding: .8em;
+	height: 15px;
+}
+
+.submit-search{
+	padding: 1em;
 }

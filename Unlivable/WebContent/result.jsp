@@ -90,33 +90,49 @@
 <body class="container">
 	<div class="row">
 		<div class="center">
-			<h1>Unlivable</h1>
+			<h1>Unlivable: Search Results</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6">
 			<div>
-				<c:forEach items="${properties}" var="item">
+				<c:forEach items="${searchProperties.keySet()}" var="item">
+					<br>
 					<table>
 						<tr>
-							<td>${item.address.streetNum}</td>
-							<td>${item.address.nsew}${item.address.streetName}</td>
-							<td>${item.address.unit}</td>
-						</tr>
-						<tr>
-							<td class="subtitle">Address Number</td>
-							<td class="subtitle">Street Name</td>
-							<td class="subtitle">Unit</td>
-						</tr>
-						<tr>
-							<td>${item.address.city}</td>
-							<td>${item.address.stateAbbr}</td>
-							<td>${item.address.zip}</td>
-						</tr>
-						<tr>
-							<td class="subtitle">City</td>
-							<td class="subtitle">State</td>
-							<td class="subtitle">ZIP</td>
+							<td class="result-table">
+								<div class="compare-button">
+									<input type="checkbox" style="vertical-align: middle">
+								</div>
+							</td>
+							<td>
+								<div>
+									<table>
+										<tr>
+											<c:if
+												test="${!empty searchProperties.get(item).address.streetNum}">
+												<td class="result-table">
+													<div class="subtitle-result">Address:</div>${searchProperties.get(item).address.streetNum}
+													${searchProperties.get(item).address.nsew}
+													${searchProperties.get(item).address.streetName}.
+												</td>
+											</c:if>
+											<c:if
+												test="${!empty searchProperties.get(item).address.unit}">
+												<td class="result-table"><div
+														class="subtitle-result-right">Unit:</div>${searchProperties.get(item).address.unit}</td>
+											</c:if>
+									</table>
+									<table>
+										<tr class="result-table">
+											<td class="result-table"><div class="subtitle-result">City:</div>${searchProperties.get(item).address.city}</td>
+											<td class="result-table"><div
+													class="subtitle-result-right">State:</div>${searchProperties.get(item).address.stateAbbr}</td>
+											<td class="result-table"><div
+													class="subtitle-result-right">ZIP:</div>${searchProperties.get(item).address.zip}</td>
+									</table>
+								</div>
+							</td>
 						</tr>
 					</table>
 				</c:forEach>

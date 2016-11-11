@@ -19,7 +19,7 @@ public class UnlivableController {
 	private UnlivableDAO unlivableDAO;
 
 	@RequestMapping(path = "GetPropertyData.do", params = "streetNum", method = RequestMethod.GET)
-	public ModelAndView queryPropertyByName(	@RequestParam("streetNum") String streetNum,
+	public ModelAndView queryPropertyByAddress(	@RequestParam("streetNum") String streetNum,
 												@RequestParam("nsew") String nsew,
 												@RequestParam("streetName") String streetName,
 												@RequestParam("unit") String unit,
@@ -27,7 +27,7 @@ public class UnlivableController {
 												@RequestParam("stateAbbr") String stateAbbr,
 												@RequestParam("zip") String zip) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("properties", unlivableDAO.getPropertyByAddress(streetNum, nsew, streetName, unit, city, stateAbbr, zip));
+		mv.addObject("searchProperties", unlivableDAO.getPropertyByAddress(streetNum, nsew, streetName, unit, city, stateAbbr, zip));
 		mv.setViewName("result.jsp");
 		return mv;
 	}
