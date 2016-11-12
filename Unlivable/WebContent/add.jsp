@@ -96,10 +96,11 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div>
-				<form action="addPropertyData.do" method="POST">
+				<form action="AddPropertyData.do" method="POST">
 					<table>
 						<tr>
-							<div>Please enter the address for the property you wish to add</div>
+							<div>Please enter the address for the property you wish to
+								add</div>
 						</tr>
 						<tr>
 							<td class="field"><input type="text" name="streetNum" /></td>
@@ -192,47 +193,8 @@
 							<td class="subtitle-state">State</td>
 							<td class="subtitle-center">ZIP</td>
 						</tr>
-					</table><br>
-					<table>
-						<tr>
-							<div>Please enter the unlivable information for the property you wish to add</div>
-							<div class="description">Unlivable space includes hallways, landings, and areas included in total square footage that is non-dwelling.</div>
-						</tr>
-						<tr>
-							<td class="field"><input type="number" name="numFloors" /></td>
-							<td class="field"><input type="text" name="numOfBa" /></td>
-							<td class="field"><input type="number" name="numOfBr" /></td>
-						</tr>
-						<tr>
-							<td class="subtitle-left"># of Floors</td>
-							<td class="subtitle-center"># of Bedrooms</td>
-							<td class="subtitle-center"># of Bathrooms</td>
-						</tr>
 					</table>
-					<table>
-						<tr>
-							<td class="field"><input type="text" name="buildingSqft" /></td>
-							<td class="field"><input type="text" name="stairSqft" /></td>
-							<td class="field"><input type="text" name="hallSqft" /></td>
-						</tr>
-						<tr>
-							<td class="subtitle-left">Building SqFt.</td>
-							<td class="subtitle-center">Stair SqFt.</td>
-							<td class="subtitle-center">Other unlivable space</td>
-						</tr>
-					</table>
-					<table>
-						<tr>
-							<td class="field"><input type="text" name="buildingSqft" /></td>
-							<td class="field-top"><input type="checkbox" name="stairSqft" /> Are normal (non-vaulted)<br>ceilings greater than 8ft?</div></td>
-							<td class="field-top"><input type="checkbox" name="hallSqft" /></td><td class="subtitle-center-top">Other unlivable space</td>
-						
-						</tr>
-						<tr>
-							<td class="subtitle-left">Land SqFt. (optional)</td>
-							</tr>
-					</table>
-					<div class="submit-search">
+					<div class="submit-add">
 						<input type="submit" value="Add Property">
 					</div>
 				</form>

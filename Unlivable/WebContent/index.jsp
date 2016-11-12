@@ -29,8 +29,8 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6">
-			<div><a href="addProperty.jsp">ADD NEW PROPERTIES</a></div>
-			<div>SEARCH FOR PROPERTIES</div>
+			<div><a href="add.jsp">ADD NEW PROPERTIES</a></div>
+			<div><a href="search.jsp">SEARCH FOR PROPERTIES</a></div>
 		</div>
 
 		<div class="col-md-6">

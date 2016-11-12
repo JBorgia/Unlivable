@@ -50,8 +50,9 @@
 	width: 150px;
 	height: 10px;
 	vertical-align: top;
-	padding-top: 4px;
 	padding-right: 23px;
+	padding-top: 8px;
+	padding-left: 3px;
 	text-align: center;
 }
 
@@ -86,4 +87,14 @@
 
 .submit-search {
 	padding: 1em;
+}
+
+.submit-add {
+	padding-left: 27em;
+}
+
+#ceiling-checkbox{
+	padding-left:8px;
+	padding-top: 5px;
+	padding-right:3px;
 }

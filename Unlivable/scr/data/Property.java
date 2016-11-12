@@ -16,10 +16,24 @@ public class Property {
 
 	public Property() {
 	}
-
+	
+	public Property(Address address, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa,
+			Boolean vaultedCeiling, Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
+		this.address = address;
+		this.buildingSqft = buildingSqft;
+		this.landSqft = landSqft;
+		this.numOfFloors = numOfFloors;
+		this.numOfBr = numOfBr;
+		this.numOfBa = numOfBa;
+		this.vaultedCeiling = vaultedCeiling;
+		this.stairSqft = stairSqft;
+		this.hallSqft = hallSqft;
+		this.bedrooms = bedrooms;
+	}
+	
 	public Property(String streetNum, String nsew, String streetName, String unit, String city, String stateAbbr,
 			String zip, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa,
-			Boolean vaultedCeiling, Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
+			String vaultedCeiling, Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
 		System.out.println("PROPERTY: I'M GETTING MADE & HAVEN'T BROKEN YET! streetNum is: " + streetNum);
 		this.address = new Address();
 		this.address.setStreetNum(streetNum);
@@ -34,7 +48,7 @@ public class Property {
 		this.numOfFloors = numOfFloors;
 		this.numOfBr = numOfBr;
 		this.numOfBa = numOfBa;
-		this.vaultedCeiling = vaultedCeiling;
+		setVaultedCeiling(vaultedCeiling);
 		this.stairSqft = stairSqft;
 		this.hallSqft = hallSqft;
 		this.bedrooms = bedrooms;
@@ -102,6 +116,30 @@ public class Property {
 
 	public Boolean getVaultedCeiling() {
 		return vaultedCeiling;
+	}
+
+	public void setVaultedCeiling(String vaultedCeiling) {
+		this.vaultedCeiling = Boolean.parseBoolean(vaultedCeiling);
+	}
+
+	@Override
+	public String toString() {
+		return "Property [address=" + address + ", numOfBr=" + numOfBr + ", numOfBa=" + numOfBa + ", numOfFloors="
+				+ numOfFloors + ", buildingSqft=" + buildingSqft + ", landSqft=" + landSqft + ", vaultedCeiling="
+				+ vaultedCeiling + ", stairSqft=" + stairSqft + ", hallSqft=" + hallSqft + ", bedrooms=" + bedrooms
+				+ "]";
+	}
+
+	public List<Bedroom> getBedrooms() {
+		return bedrooms;
+	}
+
+	public void setBedrooms(List<Bedroom> bedrooms) {
+		this.bedrooms = bedrooms;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public void setVaultedCeiling(Boolean vaultedCeiling) {

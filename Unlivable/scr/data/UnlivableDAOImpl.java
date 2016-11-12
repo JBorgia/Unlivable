@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 public class UnlivableDAOImpl implements UnlivableDAO {
 	private static final String FILE_NAME = "/WEB-INF/lib/database.csv";
 	private Map<String, Property> properties = new HashMap<>();
+	Address address;
 	/*
 	 * Use Autowired to have Spring inject an instance of a
 	 * WebApplicationContext into this object after creation. We will use the
@@ -87,15 +88,15 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 				}
 				Double buildingSqft = Double.parseDouble(tokens[10].replaceAll("[^\\d.]", ""));
 				Double landSqft = Double.parseDouble(tokens[11].replaceAll("[^\\d.]", ""));
-				Boolean vaultedCeiling = Boolean.parseBoolean(tokens[12]);
+				String vaultedCeiling = tokens[12];
 				Double stairSqft = Double.parseDouble(tokens[13].replaceAll("[^\\d.]", ""));
 				Double hallSqft = Double.parseDouble(tokens[14].replaceAll("[^\\d.]", ""));
 				for (int i = 0; i < numOfBr; i++) {
 					Bedroom bedroom = new Bedroom();
-					Boolean attachedBa = Boolean.parseBoolean(tokens[15 + i * 4]);
-					Boolean closet = Boolean.parseBoolean(tokens[16 + i * 4]);
-					Double bedroomSqft = Double.parseDouble(tokens[17 + i * 4].replaceAll("[^\\d.]", ""));
-					Double closetSqft = Double.parseDouble(tokens[18 + i * 4].replaceAll("[^\\d.]", ""));
+					String attachedBa = tokens[15 + i * 4];
+					String closet = tokens[16 + i * 4];
+					String bedroomSqft = tokens[17 + i * 4].replaceAll("[^\\d.]", "");
+					String closetSqft = tokens[18 + i * 4].replaceAll("[^\\d.]", "");
 					bedroom.setAttachedBa(attachedBa);
 					bedroom.setCloset(closet);
 					bedroom.setBedroomSqft(bedroomSqft);
@@ -132,9 +133,10 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 			boolean stateAbbrCase = false;
 			boolean zipCase = false;
 
-			if(streetName.equals("")){
-				
-			}else if (properties.get(key).getAddress().getStreetNum().toUpperCase().contains(streetName.toUpperCase())) {
+			if (streetName.equals("")) {
+
+			} else if (properties.get(key).getAddress().getStreetNum().toUpperCase()
+					.contains(streetName.toUpperCase())) {
 				System.out.println("streetNum: " + streetNum);
 				streetNumCase = true;
 			}
@@ -186,7 +188,18 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 	}
 
 	@Override
+	public String getKeyNumOfProperty(Property property) {
+		Set<String> keys = properties.keySet();
+		for (String string : keys) {
+			if (property.equals(properties.get(string)))
+				return string;
+		}
+		return null;
+	}
+
+	@Override
 	public void addProperty(Property property) {
+		System.out.println(property);
 		properties.put(createKeyNum(property.getAddress().getStreetNum(), property.getAddress().getZip(),
 				property.getAddress().getUnit()), property);
 	}

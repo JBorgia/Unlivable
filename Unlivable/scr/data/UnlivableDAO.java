@@ -8,4 +8,6 @@ public interface UnlivableDAO {
 	public Property getPropertyByKeyNum(String keyNum);
 
 	public void addProperty(Property property);
+
+	public String getKeyNumOfProperty(Property property);
 }
