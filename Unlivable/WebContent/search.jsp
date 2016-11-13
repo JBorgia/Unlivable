@@ -35,6 +35,7 @@
 					<table>
 						<tr>
 							<div>Please enter the address of the property to retrieve</div>
+							<div class="description">Empty fields are treated as wildcards. Leave all fields empty to retrieve all properties.</div>
 						</tr>
 						<tr>
 							<td class="field"><input type="text" name="streetNum" /></td>

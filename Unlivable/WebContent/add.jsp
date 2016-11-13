@@ -100,7 +100,7 @@
 					<table>
 						<tr>
 							<div>Please enter the address for the property you wish to
-								add</div>
+								add.</div>
 						</tr>
 						<tr>
 							<td class="field"><input type="text" name="streetNum" /></td>
