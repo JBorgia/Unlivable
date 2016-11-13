@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Property {
@@ -10,15 +11,15 @@ public class Property {
 	private Double buildingSqft;
 	private Double landSqft;
 	private Boolean vaultedCeiling;
-	private Double stairSqft;
-	private Double hallSqft;
+	private Integer garageSpaces;
+	private Double unlivableSqft;
 	private List<Bedroom> bedrooms;
 
 	public Property() {
 	}
-	
-	public Property(Address address, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa,
-			Boolean vaultedCeiling, Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
+
+	public Property(Address address, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr,
+			Double numOfBa, Boolean vaultedCeiling, Integer garageSpaces, Double unlivableSqft, List<Bedroom> bedrooms) {
 		this.address = address;
 		this.buildingSqft = buildingSqft;
 		this.landSqft = landSqft;
@@ -26,14 +27,14 @@ public class Property {
 		this.numOfBr = numOfBr;
 		this.numOfBa = numOfBa;
 		this.vaultedCeiling = vaultedCeiling;
-		this.stairSqft = stairSqft;
-		this.hallSqft = hallSqft;
+		this.garageSpaces = garageSpaces;
+		this.unlivableSqft = unlivableSqft;
 		this.bedrooms = bedrooms;
 	}
-	
+
 	public Property(String streetNum, String nsew, String streetName, String unit, String city, String stateAbbr,
 			String zip, Double buildingSqft, Double landSqft, Integer numOfFloors, Integer numOfBr, Double numOfBa,
-			String vaultedCeiling, Double stairSqft, Double hallSqft, List<Bedroom> bedrooms) {
+			String vaultedCeiling, Integer garageSpaces, Double unlivableSqft, List<Bedroom> bedrooms) {
 		System.out.println("PROPERTY: I'M GETTING MADE & HAVEN'T BROKEN YET! streetNum is: " + streetNum);
 		this.address = new Address();
 		this.address.setStreetNum(streetNum);
@@ -49,8 +50,8 @@ public class Property {
 		this.numOfBr = numOfBr;
 		this.numOfBa = numOfBa;
 		setVaultedCeiling(vaultedCeiling);
-		this.stairSqft = stairSqft;
-		this.hallSqft = hallSqft;
+		this.garageSpaces = garageSpaces;
+		this.unlivableSqft = unlivableSqft;
 		this.bedrooms = bedrooms;
 	}
 
@@ -98,20 +99,20 @@ public class Property {
 		this.landSqft = landSqft;
 	}
 
-	public Double getStairSqft() {
-		return stairSqft;
+	public Integer getGarageSpaces() {
+		return garageSpaces;
 	}
 
-	public void setStairSqft(Double stairSqft) {
-		this.stairSqft = stairSqft;
+	public void setGarageSpaces(Integer garageSpaces) {
+		this.garageSpaces = garageSpaces;
 	}
 
-	public Double getHallSqft() {
-		return hallSqft;
+	public Double getUnlivableSqft() {
+		return unlivableSqft;
 	}
 
-	public void setHallSqft(Double hallSqft) {
-		this.hallSqft = hallSqft;
+	public void setUnlivableSqft(Double unlivableSqft) {
+		this.unlivableSqft = unlivableSqft;
 	}
 
 	public Boolean getVaultedCeiling() {
@@ -126,8 +127,8 @@ public class Property {
 	public String toString() {
 		return "Property [address=" + address + ", numOfBr=" + numOfBr + ", numOfBa=" + numOfBa + ", numOfFloors="
 				+ numOfFloors + ", buildingSqft=" + buildingSqft + ", landSqft=" + landSqft + ", vaultedCeiling="
-				+ vaultedCeiling + ", stairSqft=" + stairSqft + ", hallSqft=" + hallSqft + ", bedrooms=" + bedrooms
-				+ "]";
+				+ vaultedCeiling + ", garageSpaces=" + garageSpaces + ", unlivableSqft=" + unlivableSqft + ", bedrooms="
+				+ bedrooms + "]";
 	}
 
 	public List<Bedroom> getBedrooms() {
@@ -144,5 +145,13 @@ public class Property {
 
 	public void setVaultedCeiling(Boolean vaultedCeiling) {
 		this.vaultedCeiling = vaultedCeiling;
+	}
+
+	public void populateBedrooms() {
+		List<Bedroom> bedrooms = new ArrayList<>();
+		for (int i = 0; i < this.numOfBr; i++) {
+			bedrooms.add(new Bedroom());
+		}
+		this.bedrooms = bedrooms;
 	}
 }

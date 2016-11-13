@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-<title>Unlivable: Search</title>
+<title>Unlivable: New Address</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -90,7 +90,7 @@
 <body class="container">
 	<div class="row">
 		<div class="center">
-			<h1>Unlivable: Add Property</h1>
+			<h1><span class="un">Un</span>livable: New Address</h1>
 		</div>
 	</div>
 	<div class="row">
@@ -194,9 +194,15 @@
 							<td class="subtitle-center">ZIP</td>
 						</tr>
 					</table>
-					<div class="submit-add">
-						<input type="submit" value="Add Property">
-					</div>
+					<table>
+						<tr>
+							<td>
+								<div class="submit-search">
+									<input type="submit" value="Add Property">
+								</div>
+							</td>
+						</tr>
+					</table>
 				</form>
 			</div>
 		</div>

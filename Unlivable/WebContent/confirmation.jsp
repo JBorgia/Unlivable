@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-<title>Unlivable</title>
+<title>Unlivable: Confirmation</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -19,21 +19,29 @@
 <link href="https://fonts.googleapis.com/css?family=Quicksand"
 	rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 </head>
 <body>
 <body class="container">
 	<div class="row">
 		<div class="center">
-			<h1><span class="un">Un</span>livable</h1>
+			<h1>
+				<span class="un">Un</span>livable: Confirmation
+			</h1>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-6">
-			<div><a href="add.jsp">ADD NEW PROPERTIES</a></div>
-			<div><a href="search.jsp">SEARCH FOR PROPERTIES</a></div>
-			<!-- <div><a href="index.jsp">COMPARE PROPERTIES</a></div> -->
-			<div><a href="seekupdatedestroy.jsp">UPDATE A PROPERTY</a></div>
-		</div>
-	</div>
+	<br>
+	<div>${selectedPropertyKey} has been deleted.</div>
+	<table>
+		<tr>
+			<td>
+				<div class="submit-search">
+					<form action="index.jsp">
+						<input type="submit" value="Home" />
+					</form>
+				</div>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>

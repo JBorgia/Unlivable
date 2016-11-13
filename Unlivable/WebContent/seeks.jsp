@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-<title>Unlivable: Search Results</title>
+<title>Unlivable: Update</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -26,29 +26,31 @@
 	<div class="row">
 		<div class="center">
 			<h1>
-				<span class="un">Un</span>livable: Search Results
+				<span class="un">Un</span>livable: Update
 			</h1>
 		</div>
 	</div>
-	<form action="index.jsp">
+	<form action="UpdateProperty.do">
 		<table>
 			<tr>
 				<td>
 					<div class="submit-search">
 						<form action="index.jsp">
-							<input type="submit" value="Home" />
+							<a href="index.jsp"><input type="button" name="choice"
+								value="Home" /></a>
 						</form>
 					</div>
 				</td>
-				<!-- ADD COMPARISON FEATURE HERE -->
-				<%-- 				<c:if test="${searchProperties.size() > 1}">
-					<td>
-						<div class="submit-search">
-							<button type="submit" name="choice" value="compare">Compare</button>
-						</div>
-					</td>
-				</c:if> --%>
-				<!-- ADD COMPARISON FEATURE HERE -->
+				<td>
+					<div class="submit-search">
+						<button type="submit" name="choice" value="update">Update</button>
+					</div>
+				</td>
+				<td>
+					<div class="submit-search">
+						<button type="submit" name="choice" value="delete">Delete</button>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<c:forEach items="${searchProperties.keySet()}" var="item">
@@ -60,8 +62,8 @@
 							<tr>
 								<td class="result-table">
 									<div class="compare-button">
-										<input type="checkbox" style="vertical-align: middle"
-											value="$item">
+										<input type="radio" style="vertical-align: middle"
+											value="${item}" name="selectedPropertyKey">
 									</div>
 								</td>
 								<td>
@@ -134,10 +136,7 @@
 										SqFt:</div>${searchProperties.get(item).unlivableSqft}</td>
 							</c:if>
 							<c:if test="${!empty searchProperties.get(item).unlivableSqft}">
-								<td class="result-table"><div class="subtitle-result-right">Unlivable:</div>
-									<fmt:formatNumber
-										value="${searchProperties.get(item).unlivableSqft / searchProperties.get(item).buildingSqft}"
-										type="percent" maxFractionDigits="2" /></td>
+								<td class="result-table"><div class="subtitle-result-right">Unlivable:</div><fmt:formatNumber value="${searchProperties.get(item).unlivableSqft / searchProperties.get(item).buildingSqft}" type="percent" maxFractionDigits="2"/></td>
 							</c:if>
 						</tr>
 					</table>

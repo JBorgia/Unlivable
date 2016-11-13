@@ -89,8 +89,8 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 				Double buildingSqft = Double.parseDouble(tokens[10].replaceAll("[^\\d.]", ""));
 				Double landSqft = Double.parseDouble(tokens[11].replaceAll("[^\\d.]", ""));
 				String vaultedCeiling = tokens[12];
-				Double stairSqft = Double.parseDouble(tokens[13].replaceAll("[^\\d.]", ""));
-				Double hallSqft = Double.parseDouble(tokens[14].replaceAll("[^\\d.]", ""));
+				Integer garageSpaces = Integer.parseInt(tokens[13].replaceAll("[^\\d.]", ""));
+				Double unlivableSqft = Double.parseDouble(tokens[14].replaceAll("[^\\d.]", ""));
 				for (int i = 0; i < numOfBr; i++) {
 					Bedroom bedroom = new Bedroom();
 					String attachedBa = tokens[15 + i * 4];
@@ -107,7 +107,7 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 				System.out.println("BEFORE PUT!");
 				properties.put(keyNum,
 						new Property(streetNum, nsew, streetName, unit, city, stateAbbr, zip, buildingSqft, landSqft,
-								numOfFloors, numOfBr, numOfBa, vaultedCeiling, stairSqft, hallSqft, bedrooms));
+								numOfFloors, numOfBr, numOfBa, vaultedCeiling, garageSpaces, unlivableSqft, bedrooms));
 				System.out.println("AFTER PUT!");
 			}
 		} catch (Exception e) {
@@ -124,7 +124,7 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 			String city, String stateAbbr, String zip) {
 		Map<String, Property> searchProperties = new HashMap<>();
 		Set<String> keys = properties.keySet();
-		search: for (String key : keys) {
+		for (String key : keys) {
 			boolean streetNumCase = false;
 			boolean nsewCase = false;
 			boolean streetNameCase = false;
@@ -133,44 +133,41 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 			boolean stateAbbrCase = false;
 			boolean zipCase = false;
 
-			if (streetName.equals("")) {
-
-			} else if (properties.get(key).getAddress().getStreetNum().toUpperCase()
-					.contains(streetName.toUpperCase())) {
+			if (streetNum.equals("") || properties.get(key).getAddress().getStreetNum().toUpperCase()
+					.contains(streetNum.toUpperCase())) {
 				System.out.println("streetNum: " + streetNum);
 				streetNumCase = true;
 			}
-			if (properties.get(key).getAddress().getNsew().equals(nsew)) {
+			if (nsew.equals("") || (properties.get(key).getAddress().getNsew().equals(nsew))) {
 				System.out.println("nsew: " + nsew);
 				nsewCase = true;
 			}
-			if (properties.get(key).getAddress().getStreetName().toUpperCase().contains(streetName.toUpperCase())) {
+			if (streetName.equals("") || properties.get(key).getAddress().getStreetName().toUpperCase()
+					.contains(streetName.toUpperCase())) {
 				System.out.println("streetName: " + streetName);
 				streetNameCase = true;
 			}
-			if (properties.get(key).getAddress().getUnit().toUpperCase().contains(unit.toUpperCase())) {
+			if (unit.equals("")
+					|| properties.get(key).getAddress().getUnit().toUpperCase().contains(unit.toUpperCase())) {
 				System.out.println("unit: " + unit);
 				unitCase = true;
 			}
-			if (properties.get(key).getAddress().getCity().toUpperCase().contains(city.toUpperCase())) {
+			if (city.equals("")
+					|| properties.get(key).getAddress().getCity().toUpperCase().contains(city.toUpperCase())) {
 				System.out.println("city: " + city);
 				cityCase = true;
 			}
-			if (properties.get(key).getAddress().getStateAbbr().toUpperCase().contains(stateAbbr.toUpperCase())) {
+			if (stateAbbr.equals("") || properties.get(key).getAddress().getStateAbbr().toUpperCase()
+					.contains(stateAbbr.toUpperCase())) {
 				System.out.println("stateAbbr: " + stateAbbr);
 				stateAbbrCase = true;
 			}
-			if (properties.get(key).getAddress().getZip().toUpperCase().contains(zip.toUpperCase())) {
+			if (zip.equals("") || properties.get(key).getAddress().getZip().toUpperCase().contains(zip.toUpperCase())) {
 				System.out.println("zip: " + zip);
 				zipCase = true;
 			}
 
 			if (streetNumCase && nsewCase && streetNameCase && unitCase && cityCase && stateAbbrCase && zipCase) {
-				searchProperties.clear();
-				searchProperties.put(key, properties.get(key));
-				break search;
-			} else if ((streetNumCase && streetNameCase)
-					|| ((streetNumCase || streetNameCase) && ((cityCase && stateAbbrCase) || zipCase))) {
 				searchProperties.put(key, properties.get(key));
 			}
 		}
@@ -183,8 +180,7 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 
 	@Override
 	public Property getPropertyByKeyNum(String keyNum) {
-		Property p = null;
-		return p;
+		return properties.get(keyNum);
 	}
 
 	@Override
@@ -199,7 +195,6 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 
 	@Override
 	public void addProperty(Property property) {
-		System.out.println(property);
 		properties.put(createKeyNum(property.getAddress().getStreetNum(), property.getAddress().getZip(),
 				property.getAddress().getUnit()), property);
 	}
@@ -228,5 +223,9 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 		}
 		System.out.println("Unique ID Key: " + sb);
 		return sb.toString();
+	}
+
+	public void deleteProperty(String keyNum) {
+		properties.remove(keyNum);
 	}
 }

@@ -7,19 +7,25 @@
 	display: -webkit-flex;
 }
 
-.subtitle, .description, .subtitle-left, .subtitle, .subtitle-result,
-	.subtitle-center, .subtitle-result-right, .subtitle-center-top {
+.subtitle, .description, .subtitle-br-button, .subtitle-left, .subtitle,
+	.subtitle-result, .subtitle-center, .subtitle-result-right,
+	.subtitle-center-top {
 	font-size: .8em;
 }
 
+.description {
+	padding-bottom: 10px;
+}
+
 .subtitle-result, .subtitle-result-right {
-	padding-top: 4px;
+	padding-top: 2px;
 	padding-right: 5px;
 	display: table-cell;
 	padding-right: 5px;
 }
 
 .subtitle-result-right {
+	white-space: nowrap;
 	padding-left: 20px;
 	padding-right: 5px;
 }
@@ -47,13 +53,20 @@
 }
 
 .subtitle-center-top {
-	width: 150px;
+	width: 300px;
+}
+
+.subtitle-br-button {
+	width: 140px;
+}
+
+.subtitle-center-top, .subtitle-br-button {
 	height: 10px;
 	vertical-align: top;
 	padding-right: 23px;
 	padding-top: 8px;
 	padding-left: 3px;
-	text-align: center;
+	text-align: left;
 }
 
 .field {
@@ -89,12 +102,44 @@
 	padding: 1em;
 }
 
-.submit-add {
-	padding-left: 27em;
+a {
+	color: black;
 }
 
-#ceiling-checkbox{
-	padding-left:8px;
-	padding-top: 5px;
-	padding-right:3px;
+.submit-add {
+	padding-left: 405px;
+}
+
+#ceiling-checkbox {
+	padding-left: 8px;
+	padding-top: 6px;
+	padding-bottom: 5px;
+	padding-right: 3px;
+}
+
+.wrapper {
+	display: table;
+}
+
+.wrapper div {
+	display: table-cell;
+}
+
+.center {-webkit-user-modify;
+	padding: 12px;
+}
+
+.bed-buffer {
+	padding-top: 10px;
+}
+
+.un {
+	color: white;
+	background: black;
+}
+
+#pad-modify-address {
+	padding-left: 50px;
+	padding-top: 15px;
+	padding-bottom: 25px;
 }

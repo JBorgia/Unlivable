@@ -10,4 +10,7 @@ public interface UnlivableDAO {
 	public void addProperty(Property property);
 
 	public String getKeyNumOfProperty(Property property);
+	
+	public void deleteProperty(String keyNum);
+
 }

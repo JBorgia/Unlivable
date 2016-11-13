@@ -56,4 +56,10 @@ public class Bedroom {
 		this.closetSqft = closetSqft;
 	}
 
+	@Override
+	public String toString() {
+		return "Bedroom [attachedBa=" + attachedBa + ", closet=" + closet + ", bedroomSqft=" + bedroomSqft
+				+ ", closetSqft=" + closetSqft + "]";
+	}
+
 }

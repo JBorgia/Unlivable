@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,14 +17,19 @@ import data.Property;
 import data.UnlivableDAO;
 
 @Controller
-@SessionAttributes("address")
+@SessionAttributes({ "address", "sessionProperty" })
 public class UnlivableController {
 	@Autowired
 	private UnlivableDAO unlivableDAO;
-	
+
 	@ModelAttribute("address")
-	public Address initAddress(){
+	public Address initAddress() {
 		return new Address();
+	}
+
+	@ModelAttribute("sessionProperty")
+	public Property initSessionProperty() {
+		return new Property();
 	}
 
 	@RequestMapping(path = "GetPropertyData.do", params = "streetNum", method = RequestMethod.GET)
@@ -34,6 +41,44 @@ public class UnlivableController {
 		mv.addObject("searchProperties",
 				unlivableDAO.getPropertyByAddress(streetNum, nsew, streetName, unit, city, stateAbbr, zip));
 		mv.setViewName("result.jsp");
+		return mv;
+	}
+
+	@RequestMapping(path = "GetPropertyToModify.do", method = RequestMethod.GET)
+	public ModelAndView queryPropertyByToModify(@RequestParam("streetNum") String streetNum,
+			@RequestParam("nsew") String nsew, @RequestParam("streetName") String streetName,
+			@RequestParam("unit") String unit, @RequestParam("city") String city,
+			@RequestParam("stateAbbr") String stateAbbr, @RequestParam("zip") String zip) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("searchProperties",
+				unlivableDAO.getPropertyByAddress(streetNum, nsew, streetName, unit, city, stateAbbr, zip));
+		mv.setViewName("seeks.jsp");
+		return mv;
+	}
+
+	@RequestMapping(path = "UpdateProperty.do", method = RequestMethod.GET)
+	public ModelAndView updateProperty(@RequestParam("choice") String choice,
+			@RequestParam("selectedPropertyKey") String selectedPropertyKey) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("selectedPropertyKey", selectedPropertyKey);
+		if (choice.equals("update")) {
+			mv.addObject("property", unlivableDAO.getPropertyByKeyNum(selectedPropertyKey));
+			mv.setViewName("update.jsp");
+		} else if (choice.equals("delete")) {
+			unlivableDAO.deleteProperty(selectedPropertyKey);
+			mv.setViewName("confirmation.jsp");
+		}
+		return mv;
+	}
+
+	@RequestMapping(path = "ModifyProperty.do", method = RequestMethod.POST)
+	public ModelAndView modifyProperty(Property property, Address address) {
+		property.setAddress(address);
+		System.out.println(property);
+		unlivableDAO.addProperty(property);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("review.jsp");
+		mv.addObject("property", property);
 		return mv;
 	}
 
@@ -54,24 +99,49 @@ public class UnlivableController {
 	}
 
 	@RequestMapping(path = "AddPropertyDetails.do", method = RequestMethod.POST)
-	public ModelAndView addPropertyDetails(Property property,@RequestParam("addBedroom") String addBedroom) {
+	public ModelAndView addPropertyDetails(Property property, @ModelAttribute("address") Address address,
+			@RequestParam("addBedroom") String addBedroom) {
 		ModelAndView mv = new ModelAndView();
-		
-		System.out.println(mv.getModel().get("address"));
-		
+		property.setAddress(address);
 		unlivableDAO.addProperty(property);
-		mv.addObject("property", property);
 		if (Boolean.parseBoolean(addBedroom)) {
+			property.populateBedrooms();
 			mv.setViewName("add-bedroom.jsp");
+			mv.addObject("sessionProperty", property);
 		} else {
 			mv.setViewName("review.jsp");
+			mv.addObject("property", property);
 		}
 		return mv;
 	}
 
 	@RequestMapping(path = "AddPropertyBedroom.do", method = RequestMethod.POST)
-	public ModelAndView addPropertyBedroom(Property property, Bedroom bedroom) {
+	public ModelAndView addPropertyBedroom(@ModelAttribute("sessionProperty") Property property,
+			ArrayList<Bedroom> bedrooms) {
+		for (Bedroom bedroom : bedrooms) {
+			System.out.println(bedroom);
+		}
+		property.setBedrooms(bedrooms);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("review.jsp");
+		mv.addObject("property", property);
+		return mv;
+	}
+
+	@RequestMapping(path = "CompareProperties.do", method = RequestMethod.POST)
+	public ModelAndView compareProperties(Property property, @ModelAttribute("address") Address address,
+			@RequestParam("addBedroom") String addBedroom) {
+		ModelAndView mv = new ModelAndView();
+		property.setAddress(address);
 		unlivableDAO.addProperty(property);
-		return queryPropertyByKeyNum(unlivableDAO.getKeyNumOfProperty(property));
+		if (Boolean.parseBoolean(addBedroom)) {
+			property.populateBedrooms();
+			mv.setViewName("add-bedroom.jsp");
+			mv.addObject("sessionProperty", property);
+		} else {
+			mv.setViewName("review.jsp");
+			mv.addObject("property", property);
+		}
+		return mv;
 	}
 }
