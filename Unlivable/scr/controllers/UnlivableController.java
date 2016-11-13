@@ -84,8 +84,9 @@ public class UnlivableController {
 	}
 
 	@RequestMapping(path = "ModifyProperty.do", method = RequestMethod.POST)
-	public ModelAndView modifyProperty(Property property, Address address) {
+	public ModelAndView modifyProperty(Property property, Address address, ArrayList<Bedroom> bedrooms) {
 		property.setAddress(address);
+		property.setBedrooms(bedrooms);
 		System.out.println(property);
 		unlivableDAO.addProperty(property);
 		ModelAndView mv = new ModelAndView();
