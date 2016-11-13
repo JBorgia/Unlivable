@@ -69,6 +69,10 @@
 								<td class="result-table"><div class="subtitle-result-right">#
 										of Garage Spaces:</div>${property.garageSpaces}</td>
 							</c:if>
+							<c:if test="${!empty searchProperties.get(item).vaultedCeiling}">
+								<td class="result-table"><div class="subtitle-result-right">High
+										Ceilings</div></td>
+							</c:if>
 						</tr>
 						<tr class="result-table">
 							<c:if test="${!empty property.numOfFloors}">
@@ -78,10 +82,6 @@
 							<c:if test="${!empty property.landSqft}">
 								<td class="result-table"><div class="subtitle-result-right">Land
 										SqFt:</div>${property.landSqft}</td>
-							</c:if>
-							<c:if test="${!empty property.vaultedCeiling}">
-								<td class="result-table"><div class="subtitle-result-right">High
-										Ceilings:</div>${property.vaultedCeiling}</td>
 							</c:if>
 							<c:if test="${!empty property.unlivableSqft}">
 								<td class="result-table"><div class="subtitle-result-right">Unlivable

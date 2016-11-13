@@ -31,17 +31,48 @@
 		</div>
 	</div>
 	<br>
-	<div>${selectedPropertyKey} has been deleted.</div>
+	<div>Are you sure you want to delete this property? This action
+		cannot be undone.</div>
+	<div id="pad-modify-address">
+		<table>
+			<tr>
+				<td class="result-table"><c:if
+						test="${!empty property.address.streetNum}">
+						<div class="subtitle-result">Address:</div>${property.address.streetNum}
+													${property.address.nsew} ${property.address.streetName}.
+												</c:if> <c:if test="${!empty property.address.unit}">
+						<div class="subtitle-result-right">Unit:</div>${property.address.unit}
+											</c:if></td>
+
+				<tr class="result-table">
+								<td class="result-table"><div class="subtitle-result">City:</div>${property.address.city}</td>
+								<td class="result-table"><div class="subtitle-result-right">State:</div>${property.address.stateAbbr}</td>
+								<td class="result-table"><div class="subtitle-result-right">ZIP:</div>${property.address.zip}</td>
+						
+		</table>
+					</div>
 	<table>
-		<tr>
-			<td>
+					<tr>
+					<td>
 				<div class="submit-search">
 					<form action="index.jsp">
-						<input type="submit" value="Home" />
+						<a href="index.jsp"><input type="button" name="choice"
+										value="Home" /></a>
+					</form>
+				</div>
+			</td>
+			<td>
+				<div class="submit-search">
+					<form action="DeleteProperty.do">
+						<input type="button" name="choice" value="Delete" />
 					</form>
 				</div>
 			</td>
 		</tr>
 	</table>
-</body>
+
+
+		
+		
+			</body>
 </html>

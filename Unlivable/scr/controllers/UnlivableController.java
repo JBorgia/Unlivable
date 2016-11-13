@@ -61,13 +61,25 @@ public class UnlivableController {
 			@RequestParam("selectedPropertyKey") String selectedPropertyKey) {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("selectedPropertyKey", selectedPropertyKey);
+		mv.addObject("property", unlivableDAO.getPropertyByKeyNum(selectedPropertyKey));
 		if (choice.equals("update")) {
-			mv.addObject("property", unlivableDAO.getPropertyByKeyNum(selectedPropertyKey));
 			mv.setViewName("update.jsp");
 		} else if (choice.equals("delete")) {
-			unlivableDAO.deleteProperty(selectedPropertyKey);
+//			unlivableDAO.deleteProperty(selectedPropertyKey);
 			mv.setViewName("confirmation.jsp");
 		}
+		return mv;
+	}
+
+	@RequestMapping(path = "DeleteProperty.do", method = RequestMethod.GET)
+	public ModelAndView deleteProperty(@RequestParam("choice") String choice,
+			@RequestParam("selectedPropertyKey") String selectedPropertyKey) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("selectedPropertyKey", selectedPropertyKey);
+		if (choice.equals("delete")) {
+			unlivableDAO.deleteProperty(selectedPropertyKey);
+		}
+		mv.setViewName("delete.jsp");
 		return mv;
 	}
 

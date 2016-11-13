@@ -101,6 +101,10 @@
 				<div class="col-md-8">
 					<table>
 						<tr class="result-table">
+							<c:if test="${!empty searchProperties.get(item).numOfFloors}">
+								<td class="result-table"><div class="subtitle-result-right">#
+										of Floors:</div>${searchProperties.get(item).numOfFloors}</td>
+							</c:if>
 							<c:if test="${!empty searchProperties.get(item).numOfBr}">
 								<td class="result-table"><div class="subtitle-result-right">#
 										of Bedrooms:</div>${searchProperties.get(item).numOfBr}</td>
@@ -109,13 +113,13 @@
 								<td class="result-table"><div class="subtitle-result-right">#
 										of Bathrooms:</div>${searchProperties.get(item).numOfBa}</td>
 							</c:if>
-							<c:if test="${!empty searchProperties.get(item).numOfFloors}">
-								<td class="result-table"><div class="subtitle-result-right">#
-										of Floors:</div>${searchProperties.get(item).numOfFloors}</td>
-							</c:if>
 							<c:if test="${!empty searchProperties.get(item).garageSpaces}">
 								<td class="result-table"><div class="subtitle-result-right">#
 										of Garage Spaces:</div>${searchProperties.get(item).garageSpaces}</td>
+							</c:if>
+							<c:if test="${!empty searchProperties.get(item).vaultedCeiling}">
+								<td class="result-table"><div class="subtitle-result-right">High
+										Ceilings</div></td>
 							</c:if>
 						</tr>
 						<tr class="result-table">
@@ -126,10 +130,6 @@
 							<c:if test="${!empty searchProperties.get(item).landSqft}">
 								<td class="result-table"><div class="subtitle-result-right">Land
 										SqFt:</div>${searchProperties.get(item).landSqft}</td>
-							</c:if>
-							<c:if test="${!empty searchProperties.get(item).vaultedCeiling}">
-								<td class="result-table"><div class="subtitle-result-right">High
-										Ceilings:</div>${searchProperties.get(item).vaultedCeiling}</td>
 							</c:if>
 							<c:if test="${!empty searchProperties.get(item).unlivableSqft}">
 								<td class="result-table"><div class="subtitle-result-right">Unlivable
