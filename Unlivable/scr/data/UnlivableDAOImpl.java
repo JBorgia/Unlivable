@@ -53,7 +53,7 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 				System.out.println("Read streetNum");
 				String nsew = tokens[1];
 				System.out.println("Read nsew");
-				String streetName = tokens[2];
+				String streetName = tokens[2].replaceAll(".$", "");
 				System.out.println("Read streetName");
 				String unit = tokens[3];
 				System.out.println("Read unit");
@@ -143,7 +143,7 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 				nsewCase = true;
 			}
 			if (streetName.equals("") || properties.get(key).getAddress().getStreetName().toUpperCase()
-					.contains(streetName.toUpperCase())) {
+					.contains(streetName.toUpperCase().replaceAll(".$", ""))) {
 				System.out.println("streetName: " + streetName);
 				streetNameCase = true;
 			}
