@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -33,7 +34,8 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div>
-				<form action="ModifyProperty.do" method="POST">
+				<form:form method="POST" action="ModifyProperty.do"
+					modelAttribute="property">
 					<div>Modifying property ${selectedPropertyKey} . . .</div>
 					<div id="pad-modify-address">
 						<table>
@@ -54,12 +56,13 @@
 					<div>Address:</div>
 					<table>
 						<tr>
-							<td class="field"><input type="text" name="streetNum"
-								value="${property.address.streetNum}" /></td>
+							<td class="field"><form:input path="address.streetNum"
+									name="streetNum" value="${property.address.streetNum}" /></td>
 							<td>
 								<table>
 									<tr>
-										<td class="field"><select name="nsew" class="drop">
+										<td class="field"><form:select path="address.nsew"
+												class="drop">
 												<option value="${property.address.nsew}" selected="selected">N/A</option>
 												<option value="N">N</option>
 												<option value="S">S</option>
@@ -69,14 +72,14 @@
 												<option value="NE">NE</option>
 												<option value="SE">SW</option>
 												<option value="SW">SE</option>
-										</select></td>
-										<td class="field"><input type="text" name="streetName"
-											value="${property.address.streetName}" /></td>
+											</form:select></td>
+										<td class="field"><form:input path="address.streetName"
+												name="streetName" value="${property.address.streetName}" /></td>
 									</tr>
 								</table>
 							</td>
-							<td class="field"><input type="text" name="unit"
-								value="${property.address.unit}" /></td>
+							<td class="field"><form:input path="address.unit"
+									name="unit" value="${property.address.unit}" /></td>
 						</tr>
 						<tr>
 							<td class="subtitle-left">Address Number</td>
@@ -86,9 +89,10 @@
 					</table>
 					<table>
 						<tr>
-							<td class="field"><input type="text" name="city"
-								value="${property.address.city}" /></td>
-							<td class="field"><select name="stateAbbr" class="drop">
+							<td class="field"><form:input path="address.city"
+									name="city" value="${property.address.city}" /></td>
+							<td class="field"><form:select path="address.stateAbbr"
+									class="drop">
 									<option value="${property.address.stateAbbr}"
 										selected="selected">N/A</option>
 									<option value="AL">AL</option>
@@ -141,9 +145,9 @@
 									<option value="WV">WV</option>
 									<option value="WI">WI</option>
 									<option value="WY">WY</option>
-							</select></td>
-							<td class="field"><input type="text" name="zip"
-								value="${property.address.zip}" /></td>
+								</form:select></td>
+							<td class="field"><form:input path="address.zip" name="zip"
+									value="${property.address.zip}" /></td>
 						</tr>
 						<tr>
 							<td class="subtitle-left">City</td>
@@ -157,14 +161,14 @@
 							<div>Unlivable metrics:</div>
 						</tr>
 						<tr>
-							<td class="field"><input type="number" name="numOfFloors"
-								value="${property.numOfFloors}" /></td>
-							<td class="field"><input type="number" name="numOfBa"
-								value="${property.numOfBa}" /></td>
-							<td class="field"><input type="text" name="numOfBr"
-								value="${property.numOfBr}" /></td>
-							<td class="field"><input type="number" name="garageSpaces"
-								value="${property.garageSpaces}" /></td>
+							<td class="field"><form:input path="numOfFloors"
+									name="numOfFloors" value="${property.numOfFloors}" /></td>
+							<td class="field"><form:input path="numOfBa" name="numOfBa"
+									value="${property.numOfBa}" /></td>
+							<td class="field"><form:input path="numOfBr" name="numOfBr"
+									value="${property.numOfBr}" /></td>
+							<td class="field"><form:input path="garageSpaces"
+									name="garageSpaces" value="${property.garageSpaces}" /></td>
 						</tr>
 						<tr>
 							<td class="subtitle-left"># of Floors</td>
@@ -175,12 +179,12 @@
 					</table>
 					<table>
 						<tr>
-							<td class="field"><input type="text" name="landSqft"
-								value="${property.landSqft}" /></td>
-							<td class="field"><input type="text" name="buildingSqft"
-								value="${property.buildingSqft}" /></td>
-							<td class="field"><input type="text" name="unlivableSqft"
-								value="${property.unlivableSqft}" /></td>
+							<td class="field"><form:input path="landSqft"
+									name="landSqft" value="${property.landSqft}" /></td>
+							<td class="field"><form:input path="buildingSqft"
+									name="buildingSqft" value="${property.buildingSqft}" /></td>
+							<td class="field"><form:input path="unlivableSqft"
+									name="unlivableSqft" value="${property.unlivableSqft}" /></td>
 						</tr>
 						<tr>
 							<td class="subtitle-left">Land SqFt.</td>
@@ -191,13 +195,13 @@
 					<table>
 						<tr>
 							<td class="result-table"><div id="ceiling-checkbox">
-									<input type="checkbox" name="vaultedCeiling" value="TRUE" />
+									<form:input path="vaultedCeiling" name="vaultedCeiling"/>
 								</div>
 								<div class="subtitle-center-top">Is the regular ceiling
 									height greater than 8ft?</div></td>
 						</tr>
 					</table>
-					<c:forEach items="${sessionBedrooms}" var="bedroom"
+					<c:forEach items="${property.bedrooms}" var="bedroom"
 						varStatus="bedroomLoop">
 						<table>
 							<tr class="result-table">
@@ -211,15 +215,15 @@
 							<tr class="result-table">
 								<td class="result-table">
 									<div id="ceiling-checkbox">
-										<input type="checkbox" name="attachedBa" value="TRUE"
-											<c:if test="${bedroom.attachedBa='TRUE'}">checked</c:if> />
+										<form:checkbox
+											path="bedrooms[${bedroomLoop.index}].attachedBa"
+											name="attachedBa" />
 									</div>
 									<div class="subtitle-br-button">Attached Bath</div>
 								</td>
 								<td class="result-table">
 									<div id="ceiling-checkbox">
-										<input type="checkbox" name="closet" value="TRUE"
-											<c:if test="${bedroom.attachedBa='TRUE'}">checked</c:if> />
+										<form:checkbox path="bedrooms[${bedroomLoop.index}].closet" />
 									</div>
 									<div class="subtitle-br-button">Closet</div>
 								</td>
@@ -227,10 +231,12 @@
 						</table>
 						<table>
 							<tr>
-								<td class="field"><input type="text" name="bedroomSqft"
-									value="${bedroom.bedroomSqft}" /></td>
-								<td class="field"><input type="text" name="closetSqft"
-									value="${bedroom.closetSqft}" /></td>
+								<td class="field"><form:input
+										path="bedrooms[${bedroomLoop.index}].bedroomSqft"
+										name="bedroomSqft" value="${bedroom.bedroomSqft}" /></td>
+								<td class="field"><form:input
+										path="bedrooms[${bedroomLoop.index}].closetSqft"
+										name="closetSqft" value="${bedroom.closetSqft}" /></td>
 							</tr>
 							<tr>
 								<td class="subtitle-left">Bedroom SqFt</td>
@@ -247,7 +253,7 @@
 							</td>
 						</tr>
 					</table>
-				</form>
+				</form:form>
 			</div>
 		</div>
 		<div class="col-md-6"></div>

@@ -17,7 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 public class UnlivableDAOImpl implements UnlivableDAO {
 	private static final String FILE_NAME = "/WEB-INF/lib/database.csv";
 	private Map<String, Property> properties = new HashMap<>();
-	Address address;
+//	Address address;
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -67,8 +67,18 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 				Double unlivableSqft = Double.parseDouble(tokens[14].replaceAll("[^\\d.]", ""));
 				for (int i = 0; i < numOfBr; i++) {
 					Bedroom bedroom = new Bedroom();
-					String attachedBa = tokens[15 + i * 4];
-					String closet = tokens[16 + i * 4];
+					Boolean attachedBa;
+					try {
+						attachedBa = Boolean.parseBoolean(tokens[15 + i * 4]);
+					} catch (Exception e) {
+						attachedBa = false;
+					}
+					Boolean closet;
+					try {
+						closet = Boolean.parseBoolean(tokens[16 + i * 4]);
+					} catch (Exception e) {
+						closet = false;
+					}
 					String bedroomSqft = tokens[17 + i * 4].replaceAll("[^\\d.]", "");
 					String closetSqft = tokens[18 + i * 4].replaceAll("[^\\d.]", "");
 					bedroom.setAttachedBa(attachedBa);

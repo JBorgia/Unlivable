@@ -1,15 +1,15 @@
 package data;
 
 public class Bedroom {
-	private String attachedBa;
-	private String closet;
+	private Boolean attachedBa;
+	private Boolean closet;
 	private String bedroomSqft;
 	private String closetSqft;
 
 	public Bedroom() {
 	}
 
-	public Bedroom(String attachedBa, String closet, String bedroomSqft, String closetSqft) {
+	public Bedroom(Boolean attachedBa, Boolean closet, String bedroomSqft, String closetSqft) {
 		this.attachedBa = attachedBa;
 		this.closet = closet;
 		this.bedroomSqft = bedroomSqft;
@@ -19,28 +19,28 @@ public class Bedroom {
 	public String getBedroomSqft() {
 		return bedroomSqft;
 	}
-
-	public Double getValueBedroomSqft() {
-		return Double.parseDouble(bedroomSqft);
-	}
+//
+//	public Double getValueBedroomSqft() {
+//		return Double.parseDouble(bedroomSqft);
+//	}
 
 	public void setBedroomSqft(String bedroomSqft) {
 		this.bedroomSqft = bedroomSqft;
 	}
 
-	public String getAttachedBa() {
+	public Boolean getAttachedBa() {
 		return attachedBa;
 	}
 
-	public void setAttachedBa(String attachedBa) {
+	public void setAttachedBa(Boolean attachedBa) {
 		this.attachedBa = attachedBa;
 	}
 
-	public String getCloset() {
+	public Boolean getCloset() {
 		return closet;
 	}
 
-	public void setCloset(String closet) {
+	public void setCloset(Boolean closet) {
 		this.closet = closet;
 	}
 
@@ -48,9 +48,9 @@ public class Bedroom {
 		return closetSqft;
 	}
 
-	public Double getValueClosetSqft() {
-		return Double.parseDouble(closetSqft);
-	}
+//	public Double getValueClosetSqft() {
+//		return Double.parseDouble(closetSqft);
+//	}
 
 	public void setClosetSqft(String closetSqft) {
 		this.closetSqft = closetSqft;

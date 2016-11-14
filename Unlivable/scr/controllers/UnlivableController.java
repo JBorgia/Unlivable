@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ import data.Property;
 import data.UnlivableDAO;
 
 @Controller
-@SessionAttributes({ "address", "sessionProperty", "sessionBedrooms" })
+@SessionAttributes({ "address", "sessionProperty"})
 public class UnlivableController {
 	@Autowired
 	private UnlivableDAO unlivableDAO;
@@ -32,8 +33,8 @@ public class UnlivableController {
 		return new Property();
 	}
 
-	@ModelAttribute("sessionProperty")
-	public ArrayList<Bedroom> initSessionBedrooms() {
+	@ModelAttribute("bedrooms")
+	public List<Bedroom> initModelBedrooms() {
 		return new ArrayList<Bedroom>();
 	}
 
@@ -67,11 +68,10 @@ public class UnlivableController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("selectedPropertyKey", selectedPropertyKey);
 		mv.addObject("property", unlivableDAO.getPropertyByKeyNum(selectedPropertyKey));
-		mv.addObject("sessionBedrooms", unlivableDAO.getPropertyByKeyNum(selectedPropertyKey).getBedrooms());
+//		mv.addObject("sessionBedrooms", unlivableDAO.getPropertyByKeyNum(selectedPropertyKey).getBedrooms());
 		if (choice.equals("update")) {
 			mv.setViewName("update.jsp");
 		} else if (choice.equals("delete")) {
-			// unlivableDAO.deleteProperty(selectedPropertyKey);
 			mv.setViewName("confirmation.jsp");
 		}
 		return mv;
@@ -90,13 +90,14 @@ public class UnlivableController {
 	}
 
 	@RequestMapping(path = "ModifyProperty.do", method = RequestMethod.POST)
-	public ModelAndView modifyProperty(Property property, Address address, @ModelAttribute("sessionBedrooms") ArrayList<Bedroom> bedrooms) {
-		System.out.println("The bedroom current status" + bedrooms);
-		for (Bedroom bedroom : bedrooms) {
+	public ModelAndView modifyProperty(@ModelAttribute("property") Property property) {
+		System.out.println("The bedroom current status" + property.getBedrooms());
+		
+		for (Bedroom bedroom : property.getBedrooms()) {
 			System.out.println("Contents of bedroom: " + bedroom);
 		}
-		property.setAddress(address);
-		property.setBedrooms(bedrooms);
+//		property.setAddress(address);
+//		property.setBedrooms(bedrooms);
 		unlivableDAO.addProperty(property);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("review.jsp");
