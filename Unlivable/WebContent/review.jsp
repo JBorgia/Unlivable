@@ -26,7 +26,7 @@
 	<div class="row">
 		<div class="center">
 			<h1>
-				<span class="un">Un</span>livable: Review Entry
+				<a href="index.jsp"><span class="un">Un</span>livable</a>: Review Entry
 			</h1>
 		</div>
 	</div>

@@ -26,7 +26,7 @@
 	<div class="row">
 		<div class="center">
 			<h1>
-				<span class="un">Un</span>livable: Search Results
+				<a href="index.jsp"><span class="un">Un</span>livable</a>: Search Results
 			</h1>
 		</div>
 	</div>

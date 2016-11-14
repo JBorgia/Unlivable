@@ -18,19 +18,10 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 	private static final String FILE_NAME = "/WEB-INF/lib/database.csv";
 	private Map<String, Property> properties = new HashMap<>();
 	Address address;
-	/*
-	 * Use Autowired to have Spring inject an instance of a
-	 * WebApplicationContext into this object after creation. We will use the
-	 * WebApplicationContext to retrieve an ServletContext so we can read from a
-	 * file.
-	 */
+
 	@Autowired
 	private WebApplicationContext wac;
 
-	/*
-	 * The @PostConstruct method is called by Spring after object creation and
-	 * dependency injection
-	 */
 	@PostConstruct
 	public void init() {
 		// Retrieve an input stream from the servlet context
@@ -42,47 +33,30 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 			while ((line = buf.readLine()) != null) {
 				List<Bedroom> bedrooms = new ArrayList<>();
 				String[] tokens = line.split(",");
-
-				for (String string : tokens) {
-
-					System.out.println(string);
-				}
-
 				String streetNum;
 				streetNum = tokens[0].replaceAll("[^\\d./]", "");
-				System.out.println("Read streetNum");
 				String nsew = tokens[1];
-				System.out.println("Read nsew");
 				String streetName = tokens[2].replaceAll(".$", "");
-				System.out.println("Read streetName");
 				String unit = tokens[3];
-				System.out.println("Read unit");
 				String city = tokens[4];
-				System.out.println("Read city");
 				String stateAbbr = tokens[5];
-				System.out.println("Read stateAbbr");
 				String zip = tokens[6].substring(0, 5).replaceAll("[^\\d.]", "");
-				System.out.println("Read zip");
 				String keyNum = createKeyNum(streetNum, zip, unit);
-				System.out.println("Got key");
 				Integer numOfBr;
 				try {
 					numOfBr = Integer.parseInt(tokens[7]);
-					System.out.println("Read numOfBr");
 				} catch (Exception e) {
 					numOfBr = 0;
 				}
 				Double numOfBa;
 				try {
 					numOfBa = Double.parseDouble(tokens[8].replaceAll("[^\\d.]", ""));
-					System.out.println("Read numOfBa");
 				} catch (Exception e) {
 					numOfBa = 0.0;
 				}
 				Integer numOfFloors;
 				try {
 					numOfFloors = Integer.parseInt(tokens[9].replaceAll("[^\\d.]", ""));
-					System.out.println("Read numOfFloors");
 				} catch (Exception e) {
 					numOfFloors = 0;
 				}
@@ -104,11 +78,9 @@ public class UnlivableDAOImpl implements UnlivableDAO {
 					bedrooms.add(bedroom);
 				}
 
-				System.out.println("BEFORE PUT!");
 				properties.put(keyNum,
 						new Property(streetNum, nsew, streetName, unit, city, stateAbbr, zip, buildingSqft, landSqft,
 								numOfFloors, numOfBr, numOfBa, vaultedCeiling, garageSpaces, unlivableSqft, bedrooms));
-				System.out.println("AFTER PUT!");
 			}
 		} catch (Exception e) {
 			System.err.println(e);

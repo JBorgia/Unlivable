@@ -17,7 +17,7 @@ import data.Property;
 import data.UnlivableDAO;
 
 @Controller
-@SessionAttributes({ "address", "sessionProperty" })
+@SessionAttributes({ "address", "sessionProperty", "sessionBedrooms" })
 public class UnlivableController {
 	@Autowired
 	private UnlivableDAO unlivableDAO;
@@ -30,6 +30,11 @@ public class UnlivableController {
 	@ModelAttribute("sessionProperty")
 	public Property initSessionProperty() {
 		return new Property();
+	}
+
+	@ModelAttribute("sessionProperty")
+	public ArrayList<Bedroom> initSessionBedrooms() {
+		return new ArrayList<Bedroom>();
 	}
 
 	@RequestMapping(path = "GetPropertyData.do", params = "streetNum", method = RequestMethod.GET)
@@ -62,10 +67,11 @@ public class UnlivableController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("selectedPropertyKey", selectedPropertyKey);
 		mv.addObject("property", unlivableDAO.getPropertyByKeyNum(selectedPropertyKey));
+		mv.addObject("sessionBedrooms", unlivableDAO.getPropertyByKeyNum(selectedPropertyKey).getBedrooms());
 		if (choice.equals("update")) {
 			mv.setViewName("update.jsp");
 		} else if (choice.equals("delete")) {
-//			unlivableDAO.deleteProperty(selectedPropertyKey);
+			// unlivableDAO.deleteProperty(selectedPropertyKey);
 			mv.setViewName("confirmation.jsp");
 		}
 		return mv;
@@ -84,10 +90,13 @@ public class UnlivableController {
 	}
 
 	@RequestMapping(path = "ModifyProperty.do", method = RequestMethod.POST)
-	public ModelAndView modifyProperty(Property property, Address address, ArrayList<Bedroom> bedrooms) {
+	public ModelAndView modifyProperty(Property property, Address address, @ModelAttribute("sessionBedrooms") ArrayList<Bedroom> bedrooms) {
+		System.out.println("The bedroom current status" + bedrooms);
+		for (Bedroom bedroom : bedrooms) {
+			System.out.println("Contents of bedroom: " + bedroom);
+		}
 		property.setAddress(address);
 		property.setBedrooms(bedrooms);
-		System.out.println(property);
 		unlivableDAO.addProperty(property);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("review.jsp");
@@ -131,9 +140,6 @@ public class UnlivableController {
 	@RequestMapping(path = "AddPropertyBedroom.do", method = RequestMethod.POST)
 	public ModelAndView addPropertyBedroom(@ModelAttribute("sessionProperty") Property property,
 			ArrayList<Bedroom> bedrooms) {
-		for (Bedroom bedroom : bedrooms) {
-			System.out.println(bedroom);
-		}
 		property.setBedrooms(bedrooms);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("review.jsp");

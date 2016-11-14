@@ -26,7 +26,7 @@
 	<div class="row">
 		<div class="center">
 			<h1>
-				<span class="un">Un</span>livable: Update
+				<a href="index.jsp"><span class="un">Un</span>livable</a>: Update
 			</h1>
 		</div>
 	</div>

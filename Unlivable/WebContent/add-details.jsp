@@ -25,7 +25,7 @@
 <body class="container">
 	<div class="row">
 		<div class="center">
-			<h1><span class="un">Un</span>livable: Property Details</h1>
+			<h1><a href="index.jsp"><span class="un">Un</span>livable</a>: Property Details</h1>
 		</div>
 	</div>
 	<div class="row">

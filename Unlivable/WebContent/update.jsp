@@ -26,7 +26,7 @@
 	<div class="row">
 		<div class="center">
 			<h1>
-				<span class="un">Un</span>livable: Modify
+				<a href="index.jsp"><span class="un">Un</span>livable</a>: Modify
 			</h1>
 		</div>
 	</div>
@@ -157,10 +157,14 @@
 							<div>Unlivable metrics:</div>
 						</tr>
 						<tr>
-							<td class="field"><input type="number" name="numOfFloors"  value="${property.numOfFloors}"/></td>
-							<td class="field"><input type="number" name="numOfBa"   value="${property.numOfBa}"/></td>
-							<td class="field"><input type="text" name="numOfBr"   value="${property.numOfBr}"/></td>
-							<td class="field"><input type="number" name="garageSpaces"   value="${property.garageSpaces}"/></td>
+							<td class="field"><input type="number" name="numOfFloors"
+								value="${property.numOfFloors}" /></td>
+							<td class="field"><input type="number" name="numOfBa"
+								value="${property.numOfBa}" /></td>
+							<td class="field"><input type="text" name="numOfBr"
+								value="${property.numOfBr}" /></td>
+							<td class="field"><input type="number" name="garageSpaces"
+								value="${property.garageSpaces}" /></td>
 						</tr>
 						<tr>
 							<td class="subtitle-left"># of Floors</td>
@@ -171,9 +175,12 @@
 					</table>
 					<table>
 						<tr>
-							<td class="field"><input type="text" name="landSqft"  value="${property.landSqft}"/></td>
-							<td class="field"><input type="text" name="buildingSqft"  value="${property.buildingSqft}"/></td>
-							<td class="field"><input type="text" name="unlivableSqft"  value="${property.unlivableSqft}"/></td>
+							<td class="field"><input type="text" name="landSqft"
+								value="${property.landSqft}" /></td>
+							<td class="field"><input type="text" name="buildingSqft"
+								value="${property.buildingSqft}" /></td>
+							<td class="field"><input type="text" name="unlivableSqft"
+								value="${property.unlivableSqft}" /></td>
 						</tr>
 						<tr>
 							<td class="subtitle-left">Land SqFt.</td>
@@ -190,7 +197,7 @@
 									height greater than 8ft?</div></td>
 						</tr>
 					</table>
-					<c:forEach items="${property.bedrooms}" var="bedroom"
+					<c:forEach items="${sessionBedrooms}" var="bedroom"
 						varStatus="bedroomLoop">
 						<table>
 							<tr class="result-table">
@@ -204,29 +211,15 @@
 							<tr class="result-table">
 								<td class="result-table">
 									<div id="ceiling-checkbox">
-										<c:choose>
-											<c:when test="${bedroom.attachedBa='TRUE'}">
-												<input type="checkbox" name="attachedBa" value="TRUE"
-													checked />
-											</c:when>
-											<c:otherwise>
-												<input type="checkbox" name="attachedBa" value="TRUE" />
-											</c:otherwise>
-										</c:choose>
+										<input type="checkbox" name="attachedBa" value="TRUE"
+											<c:if test="${bedroom.attachedBa='TRUE'}">checked</c:if> />
 									</div>
 									<div class="subtitle-br-button">Attached Bath</div>
 								</td>
 								<td class="result-table">
 									<div id="ceiling-checkbox">
-										<c:choose>
-											<c:when test="${bedroom.closet='TRUE'}">
-												<input type="checkbox" name="closet" value="TRUE"
-													checked />
-											</c:when>
-											<c:otherwise>
-												<input type="checkbox" name="closet" value="TRUE" />
-											</c:otherwise>
-										</c:choose>
+										<input type="checkbox" name="closet" value="TRUE"
+											<c:if test="${bedroom.attachedBa='TRUE'}">checked</c:if> />
 									</div>
 									<div class="subtitle-br-button">Closet</div>
 								</td>
